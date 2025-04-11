@@ -6,41 +6,28 @@ export default function RepositoryPage() {
 			<p>List of packages and libraries will go here...</p>
 
 			<button>Edit Config</button>
+			<button>Explore Templates</button>
 
 			<h2 className="text-lg font-semibold">Project Settings</h2>
 			<div></div>
 
-			<h2 className="text-lg font-semibold">Repository Structure</h2>
+			<h2 className="text-lg font-semibold">Project Structure</h2>
 			<div></div>
 
-			<h2 className="text-lg font-semibold">Dependencies / Documentation</h2>
+			<h2 className="text-lg font-semibold">Styling</h2>
 			<div></div>
 
-			<h3 className="text-lg font-semibold">User Rules</h3>
+			<h2 className="text-lg font-semibold">Tech Stack</h2>
 			<div></div>
 
-			<h3 className="text-lg font-semibold">Project Rules</h3>
-			<div></div>
+			<h2 className="text-lg font-semibold">Git</h2>
+			<div>{/* Conventional Commits, Atomic Commits, etc. */}</div>
 		</div>
 	);
 }
 
-// Convert this to a Bun App with Server-Sent-Events and Websockets.
-// Use a database and MCP instead of a file-storage to increase performance.
+// Styling
+// Colors, Icon Library, Typography, Animations.
+// Import your Brand Colors from Figma.
 
-// Features
-// Notes
-// Labels
-// - Bug / New Feature / Improvement
-// Tasks
-// - Backlog, Planned, In Progress, Completed / Cancelled
-// Cycles
-
-// Templates
-
-// MCP Servers
-
-// Conventional Commits
-
-// Notepads
-// Project Rules
+// Tech Stack and Infrastructure

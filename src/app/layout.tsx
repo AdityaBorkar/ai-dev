@@ -23,7 +23,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = { title: "AI Developer" };
 
-// TODO: Entire thing is a SPA in Bun with React Router.
+// TODO: Entire thing is a SPA in Bun with React Router + Server-Sent-Events + Websockets.
+// Use a database and MCP instead of a file-storage to increase performance.
 
 export default function RootLayout({
 	children,
