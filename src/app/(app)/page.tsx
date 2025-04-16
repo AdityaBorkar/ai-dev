@@ -1,15 +1,5 @@
-// Generate a PRD
-// Write PRD using a sample template (you can also write to Google Docs to share with others)
+import { redirect } from "next/navigation";
 
-// Generate tasks from PRD
-// Update Tasks from PRD (analyze for changes using git)
-// Analyze Complexity
-// Breakdown complex tasks into smaller tasks
-
-// Create a cycle of Tasks
-// Write tests (optional)
-// Write documentation (optional)
-
-export default async function Dashboard() {
-	return <div>Dashboard</div>;
+export default function Dashboard() {
+	redirect("/dashboard");
 }

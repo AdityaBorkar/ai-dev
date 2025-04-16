@@ -7,3 +7,14 @@ export default function CyclesPage() {
 		</div>
 	);
 }
+
+// Cycle:
+// - Name
+// - Start Date
+// - End Date
+// - Status
+// - Description
+// - TASKS
+// - Tokens Consumed
+// - Additional Instructions
+// - Integration Tests
