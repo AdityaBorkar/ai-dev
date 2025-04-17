@@ -8,9 +8,18 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { useRouter } from "next/navigation";
-import type React from "react";
 import { useMemo } from "react";
+import { Button } from "../ui/button";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "../ui/table";
 import { TaskPriorityBadge } from "./TaskPriorityBadge";
 import { TaskStatusBadge } from "./TaskStatusBadge";
 import type { Task } from "./types";
@@ -56,20 +65,12 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 		() => [
 			columnHelper.accessor("id", {
 				header: "ID",
-				cell: (info) => (
-					<span className="text-sm font-medium text-gray-500">
-						{info.getValue()}
-					</span>
-				),
+				cell: (info) => <span className="font-medium">{info.getValue()}</span>,
 				size: 80,
 			}),
 			columnHelper.accessor("title", {
 				header: "Title",
-				cell: (info) => (
-					<span className="text-sm text-gray-900 dark:text-gray-100">
-						{info.getValue()}
-					</span>
-				),
+				cell: (info) => <span>{info.getValue()}</span>,
 			}),
 			columnHelper.accessor("status", {
 				header: "Status",
@@ -84,14 +85,14 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 			columnHelper.accessor("assignee", {
 				header: "Assignee",
 				cell: (info) => (
-					<span className="text-sm text-gray-500">{info.getValue()}</span>
+					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
 				size: 150,
 			}),
 			columnHelper.accessor("due", {
 				header: "Due Date",
 				cell: (info) => (
-					<span className="text-sm text-gray-500">{info.getValue()}</span>
+					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
 				size: 120,
 			}),
@@ -125,8 +126,8 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 	if (filteredTasks.length === 0) {
 		return (
 			<div className="flex-grow flex flex-col items-center justify-center py-16">
-				<p className="text-gray-500 mb-2">No tasks found</p>
-				<p className="text-sm text-gray-400">
+				<p className="text-muted-foreground mb-2">No tasks found</p>
+				<p className="text-sm text-muted-foreground/80">
 					Try adjusting your filters or search criteria
 				</p>
 			</div>
@@ -135,41 +136,41 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 
 	return (
 		<div className="flex-grow overflow-auto">
-			<table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
-				<thead className="bg-gray-50 dark:bg-gray-900">
+			<Table>
+				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (
-						<tr key={headerGroup.id}>
+						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
-								<th
-									key={header.id}
-									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-									style={{ width: header.getSize() }}
-									onClick={header.column.getToggleSortingHandler()}
-								>
-									<div className="flex items-center space-x-1 cursor-pointer">
-										<span>
-											{flexRender(
-												header.column.columnDef.header,
-												header.getContext(),
-											)}
-										</span>
-										<span>
-											{{
-												asc: " 🔼",
-												desc: " 🔽",
-											}[header.column.getIsSorted() as string] ?? null}
-										</span>
-									</div>
-								</th>
+								<TableHead key={header.id} style={{ width: header.getSize() }}>
+									<Button
+										variant="ghost"
+										className="h-8 px-0 text-muted-foreground font-medium whitespace-nowrap"
+										onClick={header.column.getToggleSortingHandler()}
+									>
+										{flexRender(
+											header.column.columnDef.header,
+											header.getContext(),
+										)}
+										{header.column.getIsSorted() && (
+											<span className="ml-1">
+												{header.column.getIsSorted() === "asc" ? (
+													<ArrowUp className="h-4 w-4" />
+												) : (
+													<ArrowDown className="h-4 w-4" />
+												)}
+											</span>
+										)}
+									</Button>
+								</TableHead>
 							))}
-						</tr>
+						</TableRow>
 					))}
-				</thead>
-				<tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+				</TableHeader>
+				<TableBody>
 					{table.getRowModel().rows.map((row) => (
-						<tr
+						<TableRow
 							key={row.id}
-							className="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+							className="cursor-pointer hover:bg-muted/50"
 							onClick={() => handleRowClick(row.original.id)}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
@@ -177,17 +178,18 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 								}
 							}}
 							tabIndex={0}
+							data-state={row.getIsSelected() ? "selected" : undefined}
 							aria-label={`View task ${row.original.id}`}
 						>
 							{row.getVisibleCells().map((cell) => (
-								<td key={cell.id} className="px-6 py-3 whitespace-nowrap">
+								<TableCell key={cell.id}>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
-								</td>
+								</TableCell>
 							))}
-						</tr>
+						</TableRow>
 					))}
-				</tbody>
-			</table>
+				</TableBody>
+			</Table>
 		</div>
 	);
 };

@@ -1,15 +1,11 @@
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import {
-	Geist,
-	Geist_Mono,
-	// Archivo,
-	// IBM_Plex_Sans,
-	// Manrope,
-	// Work_Sans,
-} from "next/font/google";
+
+import { Geist, Geist_Mono } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+import { cn } from "@/lib/utils";
+import { ClientProviders } from "./client-providers";
 import "./globals.css";
-import { Providers } from "./providers";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,7 +36,9 @@ export default function RootLayout({
 					"font-sans bg-background text-foreground antialiased",
 				)}
 			>
-				<Providers>{children}</Providers>
+				<ClientProviders>
+					<NuqsAdapter>{children}</NuqsAdapter>
+				</ClientProviders>
 			</body>
 		</html>
 	);

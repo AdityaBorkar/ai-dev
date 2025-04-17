@@ -1,0 +1,10 @@
+{
+	"name": "AI Developer",
+	"ide": "cursor",
+	"paths": {
+		"cycles": "/cycles",
+		"tasks": "/tasks",
+		"prd": "/prd",
+		"config": "/config"
+	}
+}

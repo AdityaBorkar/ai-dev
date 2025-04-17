@@ -1,7 +1,8 @@
 export default function useConfig() {
 	const config = {
-		name: "AI Developer",
-		description: "Your awesome AI project manager",
+		workspace: {
+			name: "AI Developer",
+		},
 	};
 
 	// TODO: Sync stores using websockets / SSE.
