@@ -7,12 +7,3 @@ export default function RepositoryPage() {
 		</div>
 	);
 }
-
-/*
-<button>Edit Config</button>
-<button>Explore Templates</button>
-*/
-
-// Tech Stack
-// Tech Stack and Infrastructure
-// Git - Conventional Commits, Atomic Commits, etc.

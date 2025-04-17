@@ -3,5 +3,5 @@ description:
 globs: 
 alwaysApply: true
 ---
-- Use Bun as a package manager and javascript engine.
+- Use Bun as a package manager and javascript engine. Use 'bun' and 'bunx' commands in the terminal
 - Use Biome for Linting, Formatting, and Sorting Imports.

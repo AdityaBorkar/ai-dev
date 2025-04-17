@@ -20,9 +20,6 @@ const NAV_ITEMS = [
 		label: "Styling",
 		href: "/styling",
 		icon: PiPencilLine,
-		// Styling
-		// Colors, Icon Library, Typography, Animations.
-		// Import your Brand Colors from Figma.
 	},
 	{
 		label: "Structure",
@@ -33,11 +30,6 @@ const NAV_ITEMS = [
 		label: "Git",
 		href: "/git",
 		icon: PiGitMerge,
-	},
-	{
-		label: "Documentation",
-		href: "/documentation",
-		icon: PiBookOpen,
 	},
 ];
 
