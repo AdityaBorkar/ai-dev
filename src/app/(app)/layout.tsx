@@ -6,7 +6,6 @@ import {
 	PiFolder,
 	PiLayout,
 	PiListChecks,
-	PiNotebook,
 	PiRepeatOnce,
 	PiCode,
 } from "react-icons/pi";
@@ -18,54 +17,34 @@ import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
 	{
-		label: "Home",
-		items: [
-			{
-				label: "Dashboard",
-				href: "/dashboard",
-				icon: PiLayout,
-			},
-			{
-				label: "Stats",
-				href: "/stats-sde",
-				icon: PiChartLine,
-			},
-		],
+		label: "Dashboard",
+		href: "dashboard",
+		icon: PiLayout,
 	},
 	{
-		label: "Product Management",
-		items: [
-			{
-				label: "Cycles",
-				href: "/cycles",
-				icon: PiRepeatOnce,
-			},
-			{
-				label: "Tasks",
-				href: "/tasks",
-				icon: PiListChecks,
-			},
-			{
-				label: "PRD",
-				href: "/prd",
-				icon: PiFileDoc,
-			},
-		],
+		label: "PRD",
+		href: "prd",
+		icon: PiFileDoc,
 	},
 	{
-		label: "Software Development",
-		items: [
-			{
-				label: "Repository",
-				href: "/repository",
-				icon: PiFolder,
-			},
-			{
-				label: "AI Editor",
-				href: "/ai-editor",
-				icon: PiNotebook,
-			},
-		],
+		label: "Tasks",
+		href: "tasks",
+		icon: PiListChecks,
+	},
+	{
+		label: "Cycles",
+		href: "cycles",
+		icon: PiRepeatOnce,
+	},
+	{
+		label: "Repository",
+		href: "repository",
+		icon: PiFolder,
+	},
+	{
+		label: "Stats",
+		href: "stats",
+		icon: PiChartLine,
 	},
 ];
 
@@ -73,41 +52,43 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 	const config = useConfig();
 	if (!config) redirect("/onboarding");
 
-	const currentPath = usePathname();
+	const url = usePathname();
+	const segment = url.split("/")[1];
+
 	return (
-		<div className="flex h-screen bg-background">
-			<aside className="w-64 border-r bg-card py-2 px-4 flex flex-col">
-				<div className="flex items-center mb-6 gap-2 py-1.5 px-4 font-mono text-muted-foreground font-semibold bg-neutral-200 rounded-lg">
+		<div className="grid grid-cols-[16rem_auto] h-screen">
+			<aside className="border-r bg-card py-2 px-4">
+				<div className="flex items-center mb-6 gap-2 py-1.5 px-4 font-mono text-foreground font-semibold bg-zinc-200 rounded-lg">
 					<PiCode className="size-5" />
 					{config.workspace.name}
 				</div>
 
-				<nav className="flex-1 space-y-1">
+				<nav className="">
 					{NAV_ITEMS.map((item) => {
 						return (
-							<div key={item.label} className="not-first:mt-6">
-								<div className="text-sm px-4 mb-2 font-semibold text-muted-foreground">
+							<Button
+								key={item.href}
+								variant={segment === item.href ? "default" : "ghost"}
+								className="w-full justify-start !px-4 !py-5"
+								asChild
+							>
+								<Link href={item.href}>
+									<item.icon className="size-5" />
 									{item.label}
-								</div>
-								{item.items.map((item) => (
-									<Button
-										key={item.href}
-										variant={currentPath === item.href ? "default" : "ghost"}
-										className="w-full justify-start !px-4 !py-5"
-										asChild
-									>
-										<Link href={item.href}>
-											<item.icon className="size-5" />
-											{item.label}
-										</Link>
-									</Button>
-								))}
-							</div>
+								</Link>
+							</Button>
 						);
 					})}
 				</nav>
 			</aside>
-			<main className="flex-1 overflow-y-auto">{children}</main>
+			<main className="overflow-y-auto">{children}</main>
 		</div>
 	);
 }
+
+// Store notes, knowledge
+// Planner, find bugs
+
+// Code Mode
+// Debug Mode
+// Architect Mode

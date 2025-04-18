@@ -380,88 +380,40 @@ export default function RepositoryStructure() {
 	};
 
 	return (
-		<div className="container mx-auto p-4">
-			<div className="flex justify-between items-center mb-4">
-				<h1 className="text-2xl font-bold">Repository Structure</h1>
-				<div className="flex items-center space-x-4">
-					<div className="flex items-center space-x-2">
-						<button
-							type="button"
-							onClick={() => expandCollapseAll(true)}
-							className="p-1 rounded hover:bg-gray-200"
-							title="Expand all"
-						>
-							<PlusSquareIcon className="h-5 w-5" />
-						</button>
-						<button
-							type="button"
-							onClick={() => expandCollapseAll(false)}
-							className="p-1 rounded hover:bg-gray-200"
-							title="Collapse all"
-						>
-							<MinusSquareIcon className="h-5 w-5" />
-						</button>
-					</div>
-					<div className="flex items-center space-x-2">
-						<span className="text-sm">Prototyping Mode:</span>
-						<label className="relative inline-flex items-center cursor-pointer">
-							<input
-								type="checkbox"
-								className="sr-only peer"
-								checked={isPrototypingMode}
-								onChange={togglePrototypingMode}
-							/>
-							<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600" />
-						</label>
-					</div>
-				</div>
-			</div>
-
+		<div className="">
 			<div className="bg-white border rounded shadow-sm">
-				<div className="p-3 border-b bg-gray-50 flex items-center justify-between">
+				<header className="px-4 py-2 border-b bg-gray-50 flex items-center justify-between">
 					<div className="text-sm font-medium">EXPLORER</div>
 					<div className="flex items-center space-x-4">
-						{isPrototypingMode && (
-							<div className="flex items-center space-x-2">
-								<span className="text-xs">Show Files:</span>
-								<label className="relative inline-flex items-center cursor-pointer">
-									<input
-										type="checkbox"
-										className="sr-only peer"
-										checked={showFiles}
-										onChange={() => setShowFiles(!showFiles)}
-									/>
-									<div className="w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600" />
-								</label>
-							</div>
-						)}
+						<div className="flex items-center space-x-2">
+							<span className="text-xs">Show Files:</span>
+							{/* TODO: Replace with ShadCN Toggle Component */}
+							<button
+								type="button"
+								onClick={() => expandCollapseAll(true)}
+								className="p-1 rounded hover:bg-gray-200"
+								title="Expand all"
+							>
+								<PlusSquareIcon className="h-5 w-5" />
+							</button>
+							<button
+								type="button"
+								onClick={() => expandCollapseAll(false)}
+								className="p-1 rounded hover:bg-gray-200"
+								title="Collapse all"
+							>
+								<MinusSquareIcon className="h-5 w-5" />
+							</button>
+						</div>
 						<div className="text-xs text-gray-500">
 							Total: {formatCharCount(fileStructure.charCount)}
 						</div>
 					</div>
-				</div>
+				</header>
 				<div className="max-h-[600px] overflow-auto">
 					{renderFileStructure(fileStructure)}
 				</div>
 			</div>
-
-			{isPrototypingMode && (
-				<div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
-					<h2 className="font-medium mb-2">Prototyping Mode</h2>
-					<p className="text-sm text-gray-700 mb-2">
-						In this mode, you can define your file structure and add notes to
-						folders/files.
-					</p>
-					<ul className="text-sm text-gray-700 list-disc pl-5">
-						<li>Hover over an item to see folder/file management options</li>
-						<li>Click the note icon to add instructions for each item</li>
-						<li>
-							Notes will help document what should be stored in each location
-						</li>
-						<li>Toggle "Show Files" to focus only on the folder structure</li>
-					</ul>
-				</div>
-			)}
 		</div>
 	);
 }

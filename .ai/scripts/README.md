@@ -1,7 +1,5 @@
 # Meta-Development Script
 
-This folder contains a **meta-development script** (`dev.js`) and related utilities that manage tasks for an AI-driven or traditional software development workflow. The script revolves around a `tasks.json` file, which holds an up-to-date list of development tasks.
-
 ## Overview
 
 In an AI-driven development process—particularly with tools like [Cursor](https://www.cursor.so/)—it's beneficial to have a **single source of truth** for tasks. This script allows you to:
@@ -16,29 +14,9 @@ In an AI-driven development process—particularly with tools like [Cursor](http
 8. **Clear subtasks**—remove subtasks from specified tasks to allow regeneration or restructuring.
 9. **Show task details**—display detailed information about a specific task and its subtasks.
 
-## Configuration
-
-The script can be configured through environment variables in a `.env` file at the root of the project:
-
-### Required Configuration
-- `ANTHROPIC_API_KEY`: Your Anthropic API key for Claude
-
-### Optional Configuration
-- `MODEL`: Specify which Claude model to use (default: "claude-3-7-sonnet-20250219")
-- `MAX_TOKENS`: Maximum tokens for model responses (default: 4000)
-- `TEMPERATURE`: Temperature for model responses (default: 0.7)
-- `PERPLEXITY_API_KEY`: Your Perplexity API key for research-backed subtask generation
-- `PERPLEXITY_MODEL`: Specify which Perplexity model to use (default: "sonar-medium-online")
-- `DEBUG`: Enable debug logging (default: false)
-- `LOG_LEVEL`: Log level - debug, info, warn, error (default: info)
-- `DEFAULT_SUBTASKS`: Default number of subtasks when expanding (default: 3)
-- `DEFAULT_PRIORITY`: Default priority for generated tasks (default: medium)
-- `PROJECT_NAME`: Override default project name in tasks.json
-- `PROJECT_VERSION`: Override default version in tasks.json
-
 ## How It Works
 
-1. **`tasks.json`**:  
+1. **`tasks.json`**:    
    - A JSON file at the project root containing an array of tasks (each with `id`, `title`, `description`, `status`, etc.).  
    - The `meta` field can store additional info like the project's name, version, or reference to the PRD.  
    - Tasks can have `subtasks` for more detailed implementation steps.
@@ -194,14 +172,6 @@ The script integrates with two AI services:
 
 1. **Anthropic Claude**: Used for parsing PRDs, generating tasks, and creating subtasks.
 2. **Perplexity AI**: Used for research-backed subtask generation when the `--research` flag is specified.
-
-The Perplexity integration uses the OpenAI client to connect to Perplexity's API, which provides enhanced research capabilities for generating more informed subtasks. If the Perplexity API is unavailable or encounters an error, the script will automatically fall back to using Anthropic's Claude.
-
-To use the Perplexity integration:
-1. Obtain a Perplexity API key
-2. Add `PERPLEXITY_API_KEY` to your `.env` file
-3. Optionally specify `PERPLEXITY_MODEL` in your `.env` file (default: "sonar-medium-online")
-4. Use the `--research` flag with the `expand` command
 
 ## Logging
 
